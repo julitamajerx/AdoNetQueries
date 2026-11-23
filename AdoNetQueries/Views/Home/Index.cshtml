@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Tabelka";
+}
+
+@model System.Data.DataTable
+
+<h2>Studenci (@Model.Rows.Count)</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Data urodzenia</th>
+            <th>Miasto</th>
+            <th>Rok</th>
+            <th>Kierunek</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow s in Model.Rows)
+        {
+            <tr>
+                <td>@s["id_studenta"]</td>
+                <td>@s["imie"]</td>
+                <td>@s["nazwisko"]</td>
+                <td>@(((DateTime)s["data_urodzenia"]).ToString("yyyy-MM-dd"))</td>
+                <td>@(s.IsNull("miasto") ? "brak" : s["miasto"])</td>
+                <td>@s["rok_studiow"]</td>
+                <td>@(s.IsNull("id_kierunku") ? "brak" : s["id_kierunku"])</td>
+            </tr>
+        }
+    </tbody>
+</table>
